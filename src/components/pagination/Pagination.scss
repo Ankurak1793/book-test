@@ -1,0 +1,44 @@
+.pagination-wrapper {
+    padding: 32px 0;
+    display: flex;
+    justify-content: center;
+
+    .separator {
+        width: 1rem;
+        margin: 0 0.25rem;
+    }
+    
+    .page-item {
+        background: transparent;
+        border: none;
+        height: 32px;
+        width: 32px;
+        margin: 0 4px;
+        border-radius: 50%;
+        font-weight: 600;
+        color: color(--black);
+    
+        &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    
+        &:focus {
+            outline: 0;
+        }
+    }
+    
+    .active {
+        background-color: var(--black);
+        color: var(--white);
+    }
+    
+    .sides {
+        box-shadow: transparent 0px 0px 0px 1px, transparent 0px 0px 0px 4px, rgba(0, 0, 0, 0.18) 0px 2px 4px;
+    
+        &:hover {
+            text-decoration: none;
+            box-shadow: transparent 0px 0px 0px 1px, transparent 0px 0px 0px 4px, rgba(0, 0, 0, 0.12) 0px 6px 16px;
+        }
+    }
+}
