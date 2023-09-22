@@ -68,6 +68,10 @@ $input-placeholder-color: #838D99;
         @media (max-width: 768px) {
             padding: 30px;
         }
+
+        @media (max-width: 600px) {
+            justify-content: center;
+        }
     }
 
     .blank-data {

@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { getBookById } from "../../services/Book.Service";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
@@ -17,6 +17,7 @@ const Book = () => {
         (state) => state.books,
         shallowEqual
     );
+    const navigate = useNavigate();
 
     //This function will search the specific book by volume id.
     const getBookDetails = async (bookId: string) => {
@@ -52,6 +53,7 @@ const Book = () => {
             {book && (
                 <div className="container">
                     <div className="book-detail-header">
+                        <button onClick={() => navigate(-1)}>Back</button>
                         <div className="search-container">
                             <h2>Book Details</h2>
                         </div>
@@ -64,7 +66,7 @@ const Book = () => {
                                 <p>By {book?.volumeInfo?.authors}</p>
                                 <p>{book?.volumeInfo?.publisher}<span>{book?.volumeInfo?.publishedDate}</span></p>
                                 {amount && <p className="amount">&#8377;{amount}</p>}
-                                <a href={book?.volumeInfo?.previewLink}><button>Visit Website</button></a>
+                                <a href={book?.volumeInfo?.previewLink}>Visit Website</a>
                             </div>
                         </div>
                         <div className="description" dangerouslySetInnerHTML={{ __html: book?.volumeInfo?.description }} />
