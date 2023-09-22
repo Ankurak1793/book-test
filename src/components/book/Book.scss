@@ -1,68 +1,93 @@
-.book-container {
-    background: var(--white);
-    padding: 30px;
-    box-sizing: border-box;
-    overflow: hidden;
-    text-align: center;
-    display: flex;
+.container {
+    .book-detail-header {
+        width: 100%;
+        height: 250px;
+        color: var(--brown-100);
+        box-shadow: 0 5px 10px var(--brown-100);
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../../assets/images/book-room.png");
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-
-    .inner-box {
-        margin-top: 30px;
-        flex-grow: 0;
-        flex-shrink: 0;
-        flex-basis: 400px;
-
-        img {
-            width: auto;
-            border-radius: 10px;
-            box-shadow: 0 1px 5px rgba(212, 185, 150, 0.5);
-            height: 300px;
-            object-fit: fill;
-        }
-
-        button {
-            padding: 15px 20px;
-            font-size: 16px;
-            text-decoration: none;
-            text-align: center;
+        h2 {
+            font-size: 48px;
+            margin-top: 0;
+            margin-bottom: 15px;
             color: var(--white);
-            background: var(--black);
-            border-radius: 8px;
-            margin-top: 10px;
-            margin-bottom: 20px;
-        }
 
-        .info {
-            .title {
+            @media (max-width: 768px) {
+                font-size: 36px;
+            }
+        }
+    }
+
+    .book-container {
+        background: var(--white);
+        padding: 30px;
+        box-sizing: border-box;
+        overflow: hidden;
+        text-align: center;
+        display: flex;
+
+
+        .inner-box {
+            margin-top: 30px;
+            flex-grow: 0;
+            flex-shrink: 0;
+            flex-basis: 400px;
+
+            img {
+                width: auto;
+                border-radius: 10px;
+                box-shadow: 0 1px 5px rgba(212, 185, 150, 0.5);
+                height: 300px;
+                object-fit: fill;
+            }
+
+            button {
+                padding: 15px 20px;
                 font-size: 16px;
-                padding: 0 5px;
-                font-weight: 500;
-                margin-bottom: 0;
-            }
-
-            p {
-                margin: 0;
-            }
-
-            .amount {
-                font-size: 14px;
-                padding: 3px;
+                text-decoration: none;
+                text-align: center;
+                color: var(--white);
+                background: var(--black);
+                border-radius: 8px;
                 margin-top: 10px;
+                margin-bottom: 20px;
+            }
+
+            .info {
+                .title {
+                    font-size: 16px;
+                    padding: 0 5px;
+                    font-weight: 500;
+                    margin-bottom: 0;
+                }
+
+                p {
+                    margin: 0;
+                }
+
+                .amount {
+                    font-size: 14px;
+                    padding: 3px;
+                    margin-top: 10px;
+                }
             }
         }
-    }
 
-    .description {
-        margin-left: 30px;
-        text-align: justify;
-        font-size: 16px;
-    }
-
-    @media (max-width: 992px) {
-        flex-direction: column;
         .description {
-            margin-left: 0;
+            margin-left: 30px;
+            text-align: justify;
+            font-size: 16px;
+        }
+
+        @media (max-width: 992px) {
+            flex-direction: column;
+
+            .description {
+                margin-left: 0;
+            }
         }
     }
 }

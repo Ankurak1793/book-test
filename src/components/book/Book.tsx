@@ -50,18 +50,25 @@ const Book = () => {
         <>
             {isLoading && <Loader />}
             {book && (
-                <div className="book-container">
-                    <div className="inner-box">
-                        <img src={book?.volumeInfo?.imageLinks?.smallThumbnail} alt="" />
-                        <div className="info">
-                            <h3 className="title">{book?.volumeInfo?.title}</h3>
-                            <p>By {book?.volumeInfo?.authors}</p>
-                            <p>{book?.volumeInfo?.publisher}<span>{book?.volumeInfo?.publishedDate}</span></p>
-                            {amount && <p className="amount">&#8377;{amount}</p>}
-                            <a href={book?.volumeInfo?.previewLink}><button>Visit Website</button></a>
+                <div className="container">
+                    <div className="book-detail-header">
+                        <div className="search-container">
+                            <h2>Book Details</h2>
                         </div>
                     </div>
-                    <div className="description" dangerouslySetInnerHTML={{__html : book?.volumeInfo?.description}} />
+                    <div className="book-container">
+                        <div className="inner-box">
+                            <img src={book?.volumeInfo?.imageLinks?.smallThumbnail} alt="" />
+                            <div className="info">
+                                <h3 className="title">{book?.volumeInfo?.title}</h3>
+                                <p>By {book?.volumeInfo?.authors}</p>
+                                <p>{book?.volumeInfo?.publisher}<span>{book?.volumeInfo?.publishedDate}</span></p>
+                                {amount && <p className="amount">&#8377;{amount}</p>}
+                                <a href={book?.volumeInfo?.previewLink}><button>Visit Website</button></a>
+                            </div>
+                        </div>
+                        <div className="description" dangerouslySetInnerHTML={{ __html: book?.volumeInfo?.description }} />
+                    </div>
                 </div>
             )}
         </>
