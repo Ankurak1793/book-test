@@ -22,21 +22,21 @@ const BookList = () => {
     const debouncedVal = useDebounce(search, 500);
     const [totalPages, setTotalPages] = useState<number>(1);
     const [currentPage, setCurrentPage] = useState<number>(1);
-    const [localStorageData,setLocalStorageData] = useState<boolean>(false);
+    const [localStorageData, setLocalStorageData] = useState<boolean>(false);
     const MAX_RESULTS = 40;
 
     const handlePages = (updatePage: number) => {
-        if(localStorageData) {
-            setLocalStorageData((prevState : boolean) => !prevState);
+        if (localStorageData) {
+            setLocalStorageData((prevState: boolean) => !prevState);
         }
         setCurrentPage(updatePage);
-        localStorage.setItem('currentPage',updatePage.toString());
+        localStorage.setItem('currentPage', updatePage.toString());
         searchBook();
     }
 
     useEffect(() => {
         setLocalStorageData(localStorageData);
-    },[localStorageData])
+    }, [localStorageData])
 
 
     //When user can search the book then this function will execute
@@ -50,7 +50,7 @@ const BookList = () => {
                     localStorage.setItem('searchTermResult', JSON.stringify(res?.items));
                     dispatch(updateBooksList(res?.items));
                     const pages = Math.round(res?.totalItems / MAX_RESULTS);
-                    localStorage.setItem('totalPages',pages.toString());
+                    localStorage.setItem('totalPages', pages.toString());
                     setTotalPages(pages);
                 }
                 setIsLoading(false);
@@ -63,9 +63,9 @@ const BookList = () => {
 
     //This use effect will use for debouncing
     useEffect(() => {
-        if (debouncedVal.length > 2 && !localStorageData) {
+        if (debouncedVal.length > 0 && !localStorageData) {
             searchBook();
-        } else if(debouncedVal.length <= 2) {
+        } else if (debouncedVal.length === 0) {
             resetValues();
         }
         return;
@@ -98,15 +98,18 @@ const BookList = () => {
 
     //This function is used for displaying the list of books
     const displayBookList = () => {
-        return books?.length > 0 ? (
-            <>
-                {books?.map((item: Book) => (
-                    <Card book={item} key={item.id} />
-                ))}
-            </>
-        ) : (
-            <h1>No Data</h1>
-        )
+        return books?.map((item: Book) => (
+            <Card book={item} key={item.id} />
+        ))
+    }
+
+    const handleSearch = (e : React. ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault();
+        if(e.target.value.length === 0) {
+            localStorage.clear();
+        }
+        setSearch(e.target.value);
+        setLocalStorageData(false);
     }
     return (
         <div className="book-list-container ">
@@ -116,26 +119,25 @@ const BookList = () => {
                     <h2>Find Your Book</h2>
                     <div>
                         <input className="search-input" type="text" placeholder="Enter Your Book Name"
-                            value={search} onChange={e => {
-                                e.preventDefault();
-                                setSearch(e.target.value);
-                                setLocalStorageData(false);
-                            }}
+                            value={search} onChange={handleSearch}
                         />
                     </div>
                 </div>
             </div>
-            <div className="book-list-body">
-                {
-                    displayBookList()
-                }
-            </div>
-            {books?.length > 0 &&
-                <Pagination
-                    page={currentPage}
-                    totalPages={totalPages}
-                    handlePagination={handlePages}
-                />
+
+            {books?.length > 0 ?
+                <>
+                    <div className="book-list-body">
+                        {displayBookList()}
+                    </div>
+                    <Pagination
+                        page={currentPage}
+                        totalPages={totalPages}
+                        handlePagination={handlePages}
+                    />
+                </>
+                :
+                <h1 className="blank-data">No Data</h1>
             }
         </div>
     )
